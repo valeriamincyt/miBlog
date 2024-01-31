@@ -1,0 +1,20 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+    <h2>Complete los siguientes datos:</h2>
+    <form action="/buscar/" method="post">{% csrf_token %}
+        <p>Ingrese el número de la fuente donde quiere buscar:</p>
+        <p>1 - Repositorio Digital del Mincyt</p>
+        <p>2 - Science Direct</p>
+        <label for="fuente">Fuente: </label>
+        <input id="fuente" type="text" name="fuente" value="{{ fuente }}">
+        <p>Ingrese la sentencia de búsqueda sin acentos.</p>
+        <label for="sentencia">Sentencia: </label>
+        <input id="sentencia" type="text" name="sentencia" value="{{ sentencia }}">
+        <p>Ingrese el nombre del archivo donde quiere guardar el resultado de la búqueda.</p>
+        <label for="archivo">Archivo: </label>
+        <input id="archivo" type="text" name="archivo" value="{{ archivo }}">
+        <P><input type="submit" value="Buscar"></P>
+
+    </form>
+{% endblock %}
