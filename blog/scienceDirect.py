@@ -2,9 +2,12 @@ import requests
 import json
 #from pandas import DataFrame, concat
 import pandas
-from django.http import HttpResponseRedirect
+import os
+#from django.http import HttpResponseRedirect
 
-def busquedaEnScienceDirect(sentenciaIngresada, archivoSalida):
+def busquedaEnScienceDirect(sentenciaIngresada):
+  BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  
+  filepath = BASE_DIR + '/blog/archivos/' + 'busqueda.xlsx'
   #print("Ingrese la sentencia de búsqueda sin acentos: ")
   #ingresoUsuario = input()
   lista = sentenciaIngresada.split(" ")
@@ -33,6 +36,5 @@ def busquedaEnScienceDirect(sentenciaIngresada, archivoSalida):
     df = pandas.DataFrame.from_dict(dict_data['results'], orient='columns')
     frames = [dfAcum, df]
     dfAcum = pandas.concat(frames)
-  dfAcum.to_excel(archivoSalida + ".xlsx",  index=False)
+  dfAcum.to_excel(filepath,  index=False)
   print("Búsqueda finalizada.")
-  HttpResponseRedirect(archivoSalida + ".xlsx")

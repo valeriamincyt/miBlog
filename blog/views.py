@@ -4,8 +4,9 @@ from .forms import BuscarForm
 from django.utils import timezone
 from .models import Post
 from .busqueda import buscar
-#from django.http import HttpResponseRedirect
 from django.shortcuts import render
+import os
+from django.http import FileResponse
 
 # Create your views here.
 
@@ -23,6 +24,7 @@ def post_new(request):
 
 def buscar_new(request):
     #buscar()
+    print('Ejecutando buscar_new')
     if request.method == "POST":
         # create a form instance and populate it with data from the request:
         form = BuscarForm(request.POST)
@@ -30,15 +32,22 @@ def buscar_new(request):
         if form.is_valid():
             fuente = form["fuente"].data
             sentencia = form["sentencia"].data
-            archivoSalida = form["archivo"].data
-            buscar(fuente,sentencia,archivoSalida)
-            #return HttpResponseRedirect("")
-
+            #archivoSalida = form["archivo"].data
+            #buscar(fuente,sentencia,archivoSalida)
+            print('Sentencia ingresada: '+ sentencia)
+            buscar(fuente,sentencia)
     # if a GET (or any other method) we'll create a blank form
     else:
         form = BuscarForm()
     return render(request, "blog/buscador.html", {"form": form})
 
-#def buscador(request):
-#    sentencia = 'Inteligencia Artificial'
-#    return render(request, 'blog/post_list.html', {'sentencia': sentencia}) 
+def descargar_archivo(request): 
+ 
+    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) 
+ 
+    filename = 'busqueda.xlsx'
+ 
+    filepath = BASE_DIR + '/blog/archivos/' + filename 
+ 
+    return FileResponse(open(filepath, 'rb'), as_attachment=True)
+    

@@ -18,7 +18,11 @@
     </form>
     <div>
         <ul class="list-group">
-            <li class="list-group-item"><a href="https://www.pythonanywhere.com/user/vbecker/files/home/vbecker/arti.xlsx" target="_blank" download>vale.xlsx</a></li>
+            <li class="list-group-item">
+                <!-- <a href="https://www.pythonanywhere.com/user/vbecker/files/home/vbecker/arti.xlsx" target="_blank" download>vale.xlsx</a> -->
+                <!-- Enlace de Descarga --> 
+                <a href="{% url 'descargar' %}">Descargar</a>
+            </li>    
         </ul>
     </div>
 {% endblock %}
