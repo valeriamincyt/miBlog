@@ -20,7 +20,8 @@ def busquedaEnScienceDirect(sentenciaIngresada):
   #body = '{"qs": "inteligencia+artificial","display": {"offset": 0,"show": 10,"sortBy": "relevance"}}'
   body = '{"qs": "'+ sentencia +'","display": {"offset": 0,"show": 10,"sortBy": "relevance"}}'
   #print(body)
-  resultado = requests.put('https://api.elsevier.com/content/search/sciencedirect', body, headers={"x-els-apikey":"7f59af901d2d86f78a1fd60c1bf9426a"}).text
+  #resultado = requests.put('https://api.elsevier.com/content/search/sciencedirect', body, headers={"x-els-apikey":"7f59af901d2d86f78a1fd60c1bf9426a"}).text
+  resultado = requests.put('https://api.elsevier.com/content/search/sciencedirect', body, headers={"x-els-apikey":"f2f2d6b3d5be1de776a6d4f2ba68203c"}).text
   print(resultado)
   dict_data = json.loads(resultado)
   print(dict_data.keys())
